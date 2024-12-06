@@ -89,7 +89,7 @@ struct DeckView: View {
             
             List {
                 Section() {
-                    ForEach(deck.deckList, id: \.self) { card in
+                    ForEach(Array(deck.deckList.enumerated()), id: \.offset) { index, card in
                         Text(card)
                     }
                 } header: {

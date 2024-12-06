@@ -9,22 +9,32 @@ import SwiftUI
 import SwiftData
 
 struct ContentView: View {
+    // Persistent storage variables
     @Environment(\.modelContext) private var modelContext
     @Query private var decks: [Deck]
     
+    // Search bar string
+    @State var searchDeck:String = ""
+    
+    // variables used to create decks
     @State var creatingDeck:Bool = false
     @State var deckName:String = ""
     
+    // variables used for random deck functionality
     @State var showingRandom:Bool = false
     @State var randomDeck:Int = 0
     
+    // boolean on showing stats sheet
     @State var showingStats:Bool = false
 
     var body: some View {
         NavigationStack {
             List {
-                Section() {
-                    ForEach(decks, id: \.id) { deck in
+                Section {
+                    // decks filter by search string, or displays all decks if search string is empty
+                    ForEach(decks.filter { deck in
+                        searchDeck.isEmpty || deck.deckName.lowercased().contains(searchDeck.lowercased())
+                    }, id: \.id) { deck in
                         NavigationLink(destination: DeckView(deck: deck)) {
                             Text(deck.deckName)
                         }
@@ -32,6 +42,7 @@ struct ContentView: View {
                     .onDelete(perform: deleteDeck)
                 }
             }
+            .searchable(text: $searchDeck)
             .alert("Create Deck", isPresented: $creatingDeck, actions: {
                 TextField("Deck Name", text: $deckName)
                     .disableAutocorrection(true)
