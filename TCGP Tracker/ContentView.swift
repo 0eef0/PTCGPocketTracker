@@ -34,7 +34,8 @@ struct ContentView: View {
                     // decks filter by search string, or displays all decks if search string is empty
                     ForEach(decks.filter { deck in
                         searchDeck.isEmpty || deck.deckName.lowercased().contains(searchDeck.lowercased())
-                    }, id: \.id) { deck in
+                    }
+                    .sorted(by: { $0.timestamp < $1.timestamp }), id: \.id) { deck in
                         NavigationLink(destination: DeckView(deck: deck)) {
                             Text(deck.deckName)
                         }

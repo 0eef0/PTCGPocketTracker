@@ -13,17 +13,21 @@ import SwiftUI
 final class Deck {
     var id = UUID()
     var deckName:String
-    var deckList:[String]
+    var deckListIDs:[Int]
+    var deckListExpansions:[String]
     var wins:Int
     var losses:Int
     var lastResult:String
+    var timestamp:Date
     
     init(deckName: String, wins: Int, losses: Int) {
         self.deckName = deckName
-        self.deckList = ["","","","","","","","","","","","","","","","","","","",""]
+        self.deckListIDs = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]
+        self.deckListExpansions = ["","","","","","","","","","","","","","","","","","","",""]
         self.wins = wins
         self.losses = losses
         self.lastResult = ""
+        self.timestamp = Date()
     }
     
     func win() {

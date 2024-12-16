@@ -10,25 +10,27 @@ import SwiftUI
 struct DeckEditor: View {
     @Binding var deck:Deck
     
-//    @State var expansion:String = ""
+    let formatter: NumberFormatter = {
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .decimal
+        return formatter
+    }()
     
     var body: some View {
         ScrollView {
             ForEach(0..<20, id: \.self) { index in
                 HStack {
-                    TextField("Card \(index + 1)", text: $deck.deckList[index])
+                    TextField("Card \(index + 1)", value: $deck.deckListIDs[index], formatter: formatter)
                         .textFieldStyle(RoundedBorderTextFieldStyle())
-                        .padding()
-                        .disableAutocorrection(true)
+                        .keyboardType(.decimalPad)
                     
-//                    Picker(selection: $expansion, label: Text("Expansion")) {
-//                        Text("[Expansion unset]").tag("none")
-//                        Text("Promo").tag("promo")
-//                        Text("Genetic Apex").tag("geneticApex")
-//                    }
-//                    .frame(width: UIScreen.main.bounds.width / 2)
+                    Picker(selection: $deck.deckListExpansions[index], label: Text("Expansion")) {
+                        Text("[Expansion unset]").tag("")
+                        Text("Promo").tag("PromoA")
+                        Text("Genetic Apex").tag("GeneticApex")
+                    }
+                    .frame(width: UIScreen.main.bounds.width / 2)
                 }
-
             }
         }
     }

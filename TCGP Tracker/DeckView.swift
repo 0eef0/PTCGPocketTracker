@@ -11,6 +11,8 @@ import SwiftData
 struct DeckView: View {
     @State var deck:Deck
     
+    let gridItems = [GridItem(.flexible()), GridItem(.flexible())]
+    
     var body: some View {
         NavigationStack {
             Divider()
@@ -87,14 +89,37 @@ struct DeckView: View {
             
             Spacer()
             
-            List {
-                Section() {
-                    ForEach(deck.deckList, id: \.self) { card in
-                        Text(card)
+            ScrollView {
+                LazyVGrid(columns: gridItems, spacing: 10) {
+                    ForEach(0..<20, id: \.self) { index in
+                        if let uiImage = UIImage(named: "\(deck.deckListExpansions[index])_\(String(format: "%03d", deck.deckListIDs[index]))") {
+                            Image(uiImage: uiImage)
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: UIScreen.main.bounds.width / 2.25)
+                                .clipped()
+                        } else {
+                            Text("No Card Found")
+                                .padding(.vertical, UIScreen.main.bounds.width / 2.25 * 1.4 / 2)
+                        }
                     }
-                } header: {
-                    Text("Deck List")
+                    
+//                    ForEach(0..<20, id: \.self) { index in
+//                        HStack {
+//                            TextField("Card \(index + 1)", value: $deck.deckListIDs[index].cardID, formatter: formatter)
+//                                .textFieldStyle(RoundedBorderTextFieldStyle())
+//                                .keyboardType(.decimalPad)
+//                            
+//                            Picker(selection: $deck.deckListExpansions[index].cardExpansion, label: Text("Expansion")) {
+//                                Text("[Expansion unset]").tag("")
+//                                Text("Promo").tag("PromoA")
+//                                Text("Genetic Apex").tag("GeneticApex")
+//                            }
+//                            .frame(width: UIScreen.main.bounds.width / 2)
+//                        }
+//                    }
                 }
+                .padding()
             }
             
             .toolbar {
