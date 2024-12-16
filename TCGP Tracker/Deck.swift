@@ -42,22 +42,3 @@ final class Deck {
         }
     }
 }
-//
-//class Card {
-//    var cardName:String
-//    var cardExpansion:String
-//    
-//    init(cardName: String, cardExpansion: String) {
-//        self.cardName = cardName
-//        self.cardExpansion = cardExpansion
-//    }
-//    
-//    func getExpansionColor() -> Color {
-//        switch(cardExpansion) {
-//            case "geneticApex":
-//                return .purple
-//            default:
-//                return .black
-//        }
-//    }
-//}
