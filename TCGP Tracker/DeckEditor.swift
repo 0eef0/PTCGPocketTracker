@@ -24,6 +24,7 @@ struct DeckEditor: View {
                         Text("[Expansion unset]").tag("")
                         Text("Promo").tag("PromoA")
                         Text("Genetic Apex").tag("GeneticApex")
+                        Text("Mythical Island").tag("MythicalIsland")
                     }
                     .frame(width: UIScreen.main.bounds.width / 2.25)
                     
