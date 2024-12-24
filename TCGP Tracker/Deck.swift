@@ -48,8 +48,28 @@ final class Deck {
     func deckListString() -> String {
         var result = "\(deckName)\n"
         
+        var cardCounts: [String: Int] = [:]
+        var orderOfAppearance: [String] = []
+        
         for i in 0..<deckListExpansions.count {
-            result += "\(deckListExpansions[i]) \(deckListIDs[i])\n"
+            let expansion = deckListExpansions[i]
+            let id = deckListIDs[i]
+            let key = "\(expansion) \(id)"
+            
+            if cardCounts[key] == nil {
+                orderOfAppearance.append(key)
+            }
+            
+            cardCounts[key, default: 0] += 1
+        }
+        
+        for key in orderOfAppearance {
+            let count = cardCounts[key]!
+            if count > 1 {
+                result += "\(key) x\(count)\n"
+            } else {
+                result += "\(key)\n"
+            }
         }
         
         return result
