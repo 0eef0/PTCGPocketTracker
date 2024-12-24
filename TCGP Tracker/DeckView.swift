@@ -103,26 +103,15 @@ struct DeckView: View {
                                 .padding(.vertical, UIScreen.main.bounds.width / 2.25 * 1.4 / 2)
                         }
                     }
-                    
-//                    ForEach(0..<20, id: \.self) { index in
-//                        HStack {
-//                            TextField("Card \(index + 1)", value: $deck.deckListIDs[index].cardID, formatter: formatter)
-//                                .textFieldStyle(RoundedBorderTextFieldStyle())
-//                                .keyboardType(.decimalPad)
-//                            
-//                            Picker(selection: $deck.deckListExpansions[index].cardExpansion, label: Text("Expansion")) {
-//                                Text("[Expansion unset]").tag("")
-//                                Text("Promo").tag("PromoA")
-//                                Text("Genetic Apex").tag("GeneticApex")
-//                            }
-//                            .frame(width: UIScreen.main.bounds.width / 2)
-//                        }
-//                    }
                 }
                 .padding()
             }
-            
             .toolbar {
+                ToolbarItem(placement: .topBarTrailing) {
+                    ShareLink(item: deck.deckListString()) {
+                        Label("", systemImage: "square.and.arrow.up")
+                    }
+                }
                 ToolbarItem(placement: .topBarTrailing) {
                     NavigationLink(destination: DeckEditor(deck: $deck)) {
                         Text("Edit Deck")

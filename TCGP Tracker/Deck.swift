@@ -45,4 +45,13 @@ final class Deck {
             self.losses -= 1
         }
     }
+    func deckListString() -> String {
+        var result = "\(deckName)\n"
+        
+        for i in 0..<deckListExpansions.count {
+            result += "\(deckListExpansions[i]) \(deckListIDs[i])\n"
+        }
+        
+        return result
+    }
 }
