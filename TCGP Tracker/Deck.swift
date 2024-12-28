@@ -46,15 +46,28 @@ final class Deck {
         }
     }
     func deckListString() -> String {
-        var result = "\(deckName)\n"
+        var result = "\(deckName)\n\n"
         
         var cardCounts: [String: Int] = [:]
         var orderOfAppearance: [String] = []
         
+        var glossary:PKMNGlossary = PKMNGlossary()
+        
         for i in 0..<deckListExpansions.count {
             let expansion = deckListExpansions[i]
             let id = deckListIDs[i]
-            let key = "\(expansion) \(id)"
+            //let key = "\(expansion) \(id)"
+            
+            let key = switch expansion {
+                case "GeneticApex":
+                    glossary.GeneticApex[id - 1]
+                case "PromoA":
+                    glossary.PromoA[id - 1]
+                case "MythicalIsland":
+                    glossary.MythicalIsland[id - 1]
+                default:
+                    "Card Not Found"
+            }
             
             if cardCounts[key] == nil {
                 orderOfAppearance.append(key)
