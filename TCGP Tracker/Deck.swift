@@ -60,11 +60,11 @@ final class Deck {
             
             let key = switch expansion {
                 case "GeneticApex":
-                    glossary.GeneticApex[id - 1]
+                    "\(glossary.GeneticApex[id - 1]) (Genetic Apex)"
                 case "PromoA":
-                    glossary.PromoA[id - 1]
+                    "\(glossary.PromoA[id - 1]) (Promo A)"
                 case "MythicalIsland":
-                    glossary.MythicalIsland[id - 1]
+                    "\(glossary.MythicalIsland[id - 1]) (Mythical Island)"
                 default:
                     "Card Not Found"
             }
