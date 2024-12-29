@@ -51,14 +51,15 @@ final class Deck {
         var cardCounts: [String: Int] = [:]
         var orderOfAppearance: [String] = []
         
-        var glossary:PKMNGlossary = PKMNGlossary()
+        let glossary:PKMNGlossary = PKMNGlossary()
         
         for i in 0..<deckListExpansions.count {
             let expansion = deckListExpansions[i]
             let id = deckListIDs[i]
-            //let key = "\(expansion) \(id)"
+            var key = ""
             
-            let key = switch expansion {
+            if(id > 0) {
+                key = switch expansion {
                 case "GeneticApex":
                     "\(glossary.GeneticApex[id - 1]) (Genetic Apex)"
                 case "PromoA":
@@ -67,6 +68,9 @@ final class Deck {
                     "\(glossary.MythicalIsland[id - 1]) (Mythical Island)"
                 default:
                     "Card Not Found"
+                }
+            } else {
+                key = "Card Not Found"
             }
             
             if cardCounts[key] == nil {

@@ -18,7 +18,7 @@ struct DeckEditor: View {
     
     var body: some View {
         ScrollView {
-            ForEach(0..<20, id: \.self) { index in
+            ForEach(0..<deck.deckListExpansions.count, id: \.self) { index in
                 HStack {
                     Picker(selection: $deck.deckListExpansions[index], label: Text("Expansion")) {
                         Text("[Expansion unset]").tag("")
