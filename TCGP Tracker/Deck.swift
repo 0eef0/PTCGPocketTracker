@@ -58,14 +58,26 @@ final class Deck {
             let id = deckListIDs[i]
             var key = ""
             
-            if(id > 0) {
+            if id > 0 {
                 key = switch expansion {
                 case "GeneticApex":
-                    "\(glossary.GeneticApex[id - 1]) (Genetic Apex)"
+                    if id - 1 >= 0 && id - 1 < glossary.GeneticApex.count {
+                        "\(glossary.GeneticApex[id - 1]) (Genetic Apex)"
+                    } else {
+                        "Card Not Found"
+                    }
                 case "PromoA":
-                    "\(glossary.PromoA[id - 1]) (Promo A)"
+                    if id - 1 >= 0 && id - 1 < glossary.PromoA.count {
+                        "\(glossary.PromoA[id - 1]) (Promo A)"
+                    } else {
+                        "Card Not Found"
+                    }
                 case "MythicalIsland":
-                    "\(glossary.MythicalIsland[id - 1]) (Mythical Island)"
+                    if id - 1 >= 0 && id - 1 < glossary.MythicalIsland.count {
+                        "\(glossary.MythicalIsland[id - 1]) (Mythical Island)"
+                    } else {
+                        "Card Not Found"
+                    }
                 default:
                     "Card Not Found"
                 }
